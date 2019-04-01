@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+    <ImageView
+            android:scaleType="fitCenter"
+            android:background="@drawable/night"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <LinearLayout
+            android:padding="12dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_marginBottom="4dp"
+                    android:id="@+id/cityname_textview"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+            <TextView
+                    android:layout_marginStart="4dp"
+                    android:id="@+id/countryname_textview"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/darker_gray"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+                android:background="@drawable/background"
+                android:padding="10dp"
+                android:id="@+id/forcast_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

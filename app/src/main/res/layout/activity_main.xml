@@ -7,7 +7,7 @@
         tools:context=".MainActivity">
     <ImageView
             android:scaleType="fitCenter"
-            android:background="@drawable/landscape_night"
+            android:background="@drawable/day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     <LinearLayout
@@ -25,7 +25,7 @@
                     android:layout_marginBottom="4dp"
                     android:id="@+id/cityname_textview"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@android:color/white"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
@@ -44,7 +44,6 @@
         <android.support.v7.widget.RecyclerView
                 android:background="@drawable/background"
                 android:padding="10dp"
-                android:alpha=".5"
                 android:id="@+id/forcast_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

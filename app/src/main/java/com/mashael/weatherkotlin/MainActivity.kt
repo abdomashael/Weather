@@ -9,12 +9,10 @@ import android.util.Log
 import android.widget.TextView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.mashael.weatherkotlin.Utils.PermissionCheck
-import com.mashael.weatherkotlin.data.ForecastRequest
+import com.mashael.weatherkotlin.utils.PermissionCheck
 import com.mashael.weatherkotlin.domain.Forecast
 import com.mashael.weatherkotlin.domain.RequestForecastCommand
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
@@ -46,43 +44,39 @@ class MainActivity : AppCompatActivity() {
 
         val forecastList = findViewById<RecyclerView>(R.id.forcast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
-        val cityName= findViewById<TextView>(R.id.cityname_textview)
-        val countryName= findViewById<TextView>(R.id.countryname_textview)
+        val cityName = findViewById<TextView>(R.id.cityname_textview)
+        val countryName = findViewById<TextView>(R.id.countryname_textview)
         //forecastList.adapter = ForecastListAdapter(items)
+        getCityCoordinates(cityName, countryName, forecastList)
 
-        doAsync {
-            if (getCityCoordinates()) {
-                val result = RequestForecastCommand(cityCoordinates).execute()
-                Log.e(localClassName, result.toString())
-                uiThread {
-                    forecastList.adapter = ForecastListAdapter(result,
-                        object :ForecastListAdapter.OnItemClickListener{
-                            override fun invoke(forcast: Forecast) {
-                                toast(forcast.date)
-                            }
-                        })
-                    cityName.text=result.city
-                    countryName.text=result.country
-                }
-            }
-        }
     }
 
-    private fun getCityCoordinates(): Boolean {
+    private fun getCityCoordinates(cityName: TextView, countryName: TextView, forecastList: RecyclerView) {
         val permissionCheck = PermissionCheck(this)
-        return if (permissionCheck.checkLocationPermission()) {
+        if (permissionCheck.checkLocationPermission()) {
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
                     // Got last known location. In some rare situations this can be null.
                     cityCoordinates = "&lat=" + location?.latitude + "&lon=" + location?.longitude
-
+                    request(cityName,countryName,forecastList, cityCoordinates)
                 }
-            if (cityCoordinates==""){
-                cityCoordinates="&lat=30.63063063063063&lon=30.80236575175455"
-            }
-            true
-        } else
-            false
 
+        }
+
+    }
+
+    private fun request(cityName: TextView, countryName: TextView, forecastList: RecyclerView, cityCoordinats: String) {
+        doAsync {
+            val result = RequestForecastCommand(cityCoordinates).execute()
+            Log.e(localClassName, result.toString())
+            uiThread {
+                forecastList.adapter = ForecastListAdapter(result) { forecast ->
+                    toast(forecast.date)
+                }
+
+                cityName.text = result.city
+                countryName.text = result.country
+            }
+        }
     }
 }
