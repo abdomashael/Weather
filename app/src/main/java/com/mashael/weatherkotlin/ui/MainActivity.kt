@@ -1,4 +1,4 @@
-package com.mashael.weatherkotlin
+package com.mashael.weatherkotlin.ui
 
 import android.location.Location
 import android.os.Bundle
@@ -9,9 +9,10 @@ import android.util.Log
 import android.widget.TextView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.mashael.weatherkotlin.utils.PermissionCheck
-import com.mashael.weatherkotlin.domain.Forecast
+import com.mashael.weatherkotlin.R
+import com.mashael.weatherkotlin.ui.utils.PermissionCheck
 import com.mashael.weatherkotlin.domain.RequestForecastCommand
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
@@ -42,12 +43,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        val forecastList = findViewById<RecyclerView>(R.id.forcast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
-        val cityName = findViewById<TextView>(R.id.cityname_textview)
-        val countryName = findViewById<TextView>(R.id.countryname_textview)
         //forecastList.adapter = ForecastListAdapter(items)
-        getCityCoordinates(cityName, countryName, forecastList)
+        getCityCoordinates(citynameTextview, countrynameTextview, forecastList)
 
     }
 

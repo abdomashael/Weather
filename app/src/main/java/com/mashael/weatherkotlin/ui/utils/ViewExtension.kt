@@ -1,4 +1,4 @@
-package com.mashael.weatherkotlin.utils
+package com.mashael.weatherkotlin.ui.utils
 
 import android.content.Context
 import android.view.View
