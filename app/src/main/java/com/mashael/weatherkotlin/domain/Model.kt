@@ -1,6 +1,6 @@
 package com.mashael.weatherkotlin.domain
 
-public interface Command<out T> {
+interface Command<out T> {
     fun execute(): T
 }
 
@@ -15,3 +15,7 @@ data class Forecast(
     val date: String, val description: String, val high: Int,
     val low: Int,val iconUrl:String
 )
+
+data class CurrentForecast(val main:String,val description: String,val iconUrl: String,
+                   val temp:Int,val pressure: Int,val humidity: Int,
+                   val speed: Int,val deg: Float)

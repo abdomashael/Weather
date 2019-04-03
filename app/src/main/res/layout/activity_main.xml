@@ -5,11 +5,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
+
     <ImageView
             android:scaleType="fitCenter"
             android:background="@drawable/day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
     <LinearLayout
             android:padding="12dp"
             android:orientation="vertical"
@@ -17,12 +19,14 @@
             android:layout_height="match_parent">
 
         <LinearLayout
+                android:layout_marginBottom="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
                 android:orientation="horizontal">
 
             <TextView
-                    android:layout_marginBottom="4dp"
                     android:id="@+id/citynameTextview"
                     android:gravity="center_vertical"
                     android:textColor="@android:color/white"
@@ -41,11 +45,30 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-                android:background="@drawable/background"
-                android:padding="10dp"
-                android:id="@+id/forecastList"
+        <include layout="@layout/current_forecast"/>
+
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/background"
+                android:orientation="vertical">
+            <TextView
+                    android:padding="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="7-day forecast"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"/>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"/>
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/forecastList"
+                    android:padding="@dimen/spacing_xlarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

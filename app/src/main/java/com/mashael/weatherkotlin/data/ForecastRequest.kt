@@ -14,7 +14,6 @@ class ForecastRequest(private val cityCoordinates:String){
     }
 
     fun execute():ForecastResult{
-        Log.e("ss",cityCoordinates)
         val forecastJsonStr = URL(COMPLETE_URL+cityCoordinates+METRIC).readText()
         return Gson().fromJson(forecastJsonStr,ForecastResult::class.java)
     }

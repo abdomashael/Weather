@@ -1,5 +1,7 @@
 package com.mashael.weatherkotlin.domain
 
+import android.util.Log
+import com.mashael.weatherkotlin.data.CurrentForecastResult
 import com.mashael.weatherkotlin.data.Forecast
 import com.mashael.weatherkotlin.data.ForecastResult
 import java.text.DateFormat
@@ -15,21 +17,38 @@ class ForecastDataMapper {
             convertForecastListToDomain(forecast.list)
         )
     }
-    private fun convertForecastListToDomain(list: List<Forecast>):List<ModelForecast>{
-        return list.mapIndexed { i, forcast->
-            val dt = Calendar.getInstance().timeInMillis+TimeUnit.DAYS.toMillis(i.toLong())
-        convertForecastItemToDomain(forcast.copy(dt=dt))
+
+    fun convertCurrentFromDataModel(currentForecastResult: CurrentForecastResult): CurrentForecast {
+        return CurrentForecast(
+            currentForecastResult.weather[0].main,
+            currentForecastResult.weather[0].description,
+            generateIconUrl(currentForecastResult.weather[0].icon),
+            currentForecastResult.main.temp.toInt(),
+            currentForecastResult.main.pressure.toInt(),
+            currentForecastResult.main.humidity,
+            currentForecastResult.wind.speed.toInt(),
+            currentForecastResult.wind.deg
+        )
+    }
+
+    private fun convertForecastListToDomain(list: List<Forecast>): List<ModelForecast> {
+        return list.mapIndexed { i, forecast ->
+            val dt = Calendar.getInstance().timeInMillis + TimeUnit.DAYS.toMillis(i.toLong())
+            convertForecastItemToDomain(forecast.copy(dt = dt))
         }
     }
 
-    private fun convertForecastItemToDomain(forcast:Forecast):ModelForecast{
-        return ModelForecast(convertDate(forcast.dt),forcast.weather[0].description,
-            forcast.temp.max.toInt(),forcast.temp.min.toInt(),generateIconUrl(forcast.weather[0].icon))
+    private fun convertForecastItemToDomain(forcast: Forecast): ModelForecast {
+        return ModelForecast(
+            convertDate(forcast.dt), forcast.weather[0].description,
+            forcast.temp.max.toInt(), forcast.temp.min.toInt(), generateIconUrl(forcast.weather[0].icon)
+        )
     }
-    private fun generateIconUrl(iconCode:String):String = "http://openweathermap.org/img/w/$iconCode.png"
 
-    private fun convertDate(date: Long):String{
-        val df=DateFormat.getDateInstance(DateFormat.SHORT,Locale.getDefault())
+    private fun generateIconUrl(iconCode: String): String = "http://openweathermap.org/img/w/$iconCode.png"
+
+    private fun convertDate(date: Long): String {
+        val df = DateFormat.getDateInstance(DateFormat.MONTH_FIELD, Locale.getDefault())
         return df.format(date)
     }
 }
