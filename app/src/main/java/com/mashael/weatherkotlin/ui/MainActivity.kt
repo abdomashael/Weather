@@ -5,14 +5,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
-import android.widget.TextView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.mashael.weatherkotlin.R
-import com.mashael.weatherkotlin.domain.RequestCurrentForecastCommand
+import com.mashael.weatherkotlin.domain.commands.RequestCurrentForecastCommand
 import com.mashael.weatherkotlin.ui.utils.PermissionCheck
-import com.mashael.weatherkotlin.domain.RequestForecastCommand
+import com.mashael.weatherkotlin.domain.commands.RequestForecastCommand
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.current_forecast.*

@@ -1,9 +1,8 @@
 package com.mashael.weatherkotlin.domain
 
-import android.util.Log
-import com.mashael.weatherkotlin.data.CurrentForecastResult
-import com.mashael.weatherkotlin.data.Forecast
-import com.mashael.weatherkotlin.data.ForecastResult
+import com.mashael.weatherkotlin.data.server.CurrentForecastResult
+import com.mashael.weatherkotlin.data.server.Forecast
+import com.mashael.weatherkotlin.data.server.ForecastResult
 import java.text.DateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit

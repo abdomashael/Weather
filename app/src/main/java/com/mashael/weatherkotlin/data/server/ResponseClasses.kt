@@ -1,8 +1,8 @@
-package com.mashael.weatherkotlin.data
+package com.mashael.weatherkotlin.data.server
 
 data class ForecastResult(val city: City, val list: List<Forecast>)
 
-data class CurrentForecastResult(val name: String,val weather:List<Weather>,val main: Main,val wind: Wind)
+data class CurrentForecastResult(val name: String, val weather:List<Weather>, val main: Main, val wind: Wind)
 
 data class City(
     val id: Long, val name: String, val coord: Coordinates,

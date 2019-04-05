@@ -1,6 +1,5 @@
-package com.mashael.weatherkotlin.data
+package com.mashael.weatherkotlin.data.server
 
-import android.util.Log
 import com.google.gson.Gson
 import java.net.URL
 
@@ -13,8 +12,8 @@ class ForecastRequest(private val cityCoordinates:String){
         private const val METRIC="&units=metric"
     }
 
-    fun execute():ForecastResult{
-        val forecastJsonStr = URL(COMPLETE_URL+cityCoordinates+METRIC).readText()
-        return Gson().fromJson(forecastJsonStr,ForecastResult::class.java)
+    fun execute(): ForecastResult {
+        val forecastJsonStr = URL(COMPLETE_URL +cityCoordinates+ METRIC).readText()
+        return Gson().fromJson(forecastJsonStr, ForecastResult::class.java)
     }
 }
