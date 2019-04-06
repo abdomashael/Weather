@@ -6,7 +6,8 @@ import com.mashael.weatherkotlin.ui.App
 import org.jetbrains.anko.db.*
 
 class ForecastDbHelper(ctx: Context = App.instance) :
-    ManagedSQLiteOpenHelper(ctx,
+    ManagedSQLiteOpenHelper(
+        ctx,
         DB_NAME, null,
         DB_VERSION
     ) {
@@ -31,7 +32,23 @@ class ForecastDbHelper(ctx: Context = App.instance) :
         val CITY_ID = "cityId"
     }
 
+
+    object CurrentForecasTable {
+        val NAME = "CurrentForecast"
+        val MAIN = "main"
+        val DESCRIPTION = "description"
+        val ICONIMAGE = "icon_image"
+        val TEMP = "temp"
+        val PRESSURE = "pressure"
+        val HUMIDITY = "humidity"
+        val SPEED = "speed"
+        val DEG = "deg"
+        val TIME = "time"
+        val ID = "_id"
+    }
+
     override fun onCreate(db: SQLiteDatabase) {
+
         db.createTable(
             CityForecastTable.NAME, true,
             CityForecastTable.ID to INTEGER + PRIMARY_KEY,
@@ -48,6 +65,20 @@ class ForecastDbHelper(ctx: Context = App.instance) :
             DayForecastTable.LOW to INTEGER,
             DayForecastTable.ICON_URL to TEXT,
             DayForecastTable.CITY_ID to INTEGER
+        )
+
+        db.createTable(
+            CurrentForecasTable.NAME, true,
+            CurrentForecasTable.ID to INTEGER,
+            CurrentForecasTable.MAIN to TEXT,
+            CurrentForecasTable.DESCRIPTION to TEXT,
+            CurrentForecasTable.ICONIMAGE to BLOB,
+            CurrentForecasTable.TEMP to INTEGER,
+            CurrentForecasTable.PRESSURE to INTEGER,
+            CurrentForecasTable.HUMIDITY to INTEGER,
+            CurrentForecasTable.SPEED to INTEGER,
+            CurrentForecasTable.DEG to INTEGER,
+            CurrentForecasTable.TIME to TEXT
         )
 
 

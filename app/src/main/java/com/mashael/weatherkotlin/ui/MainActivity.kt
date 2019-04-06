@@ -17,25 +17,24 @@ import kotlinx.android.synthetic.main.current_forecast.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 private val ZIP_NO = "94043"
-/*
-private val items = listOf<String>(
-    "Mon 6/23 - Suuny - 31/17",
-    "Tue 6/24 - Foggy - 21/8",
-    "Wed 6/25 - Cloudy - 22/17",
-    "Thurs 6/26 - Rainy - 31/17",
-    "Fri 6/27 - Foggy - 21/10",
-    "Sat 6/28 - TRAPPED IN WEATHER STATION - 23/18",
-    "Sun 6/29 - Suuny - 20/7"
-)
-*/
+
 
 class MainActivity : AppCompatActivity() {
     /*val url = "http://api.openweathermap.org/data/2.5/forecast/daily?" +
             "APPID=15646a06818f61f7b8d7823ca833e1ce&zip=94043&mode=json&units=metric&cnt=7"
 */
+
+    companion object {
+        val sdf= SimpleDateFormat("HH:mm")
+    }
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             val result = RequestForecastCommand(cityCoordinates).execute()
             uiThread {
                 forecastList.adapter = ForecastListAdapter(result) { forecast ->
-                    toast(forecast.date)
+                    toast(forecast.date.toString())
                 }
 
                 citynameTextview.text = result.city
@@ -90,6 +89,7 @@ class MainActivity : AppCompatActivity() {
                     pressureTextView.text="$pressure hPa"
                     windSpeedTextView.text="$speed m/sec"
                 }
+                timeTextView.text= sdf.format(Date())
             }
         }
     }
