@@ -27,6 +27,13 @@
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@android:color/holo_blue_dark"/>
+            <TextView
+                    android:id="@+id/currentTempTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@android:color/white"/>
 
             <TextView
                     android:id="@+id/currentMainTextView"
@@ -49,13 +56,6 @@
                     android:text="Current"
                     android:textColor="@android:color/white"/>
 
-            <TextView
-                    android:id="@+id/currentTempTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="1dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@android:color/white"/>
         </LinearLayout>
 
         <ImageView
@@ -140,6 +140,36 @@
                     android:textColor="@android:color/white"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
+        </LinearLayout>
+        <LinearLayout
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="last update:  "
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+            <TextView
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:id="@+id/timeTextView"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+            <ImageButton
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_autorenew_24"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
