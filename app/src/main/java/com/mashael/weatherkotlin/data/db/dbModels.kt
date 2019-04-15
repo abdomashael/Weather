@@ -1,11 +1,11 @@
 package com.mashael.weatherkotlin.data.db
 
 class CityForecast(val map:MutableMap<String,Any?>,val dailyForecast:List<DayForecast>){
-    var _id: Long by map
+    var _id: String by map
     var city:String by map
     var country:String by map
 
-    constructor(id: Long,city:String ,country:String,dailyForecast:List<DayForecast>)
+    constructor(id: String,city:String ,country:String,dailyForecast:List<DayForecast>)
             :this(HashMap(),dailyForecast){
         this._id=id
         this.city=city
@@ -20,9 +20,9 @@ class DayForecast(var map: MutableMap<String, Any?>){
     var high:Int by map
     var low:Int by map
     var iconUrl:String by map
-    var cityId:Long by map
+    var cityId:String by map
 
-    constructor(date:Long ,description:String ,high:Int ,low:Int ,iconUrl:String ,cityId:Long)
+    constructor(date:Long ,description:String ,high:Int ,low:Int ,iconUrl:String ,cityId:String)
             :this(HashMap()){
         this.date=date
         this.description=description

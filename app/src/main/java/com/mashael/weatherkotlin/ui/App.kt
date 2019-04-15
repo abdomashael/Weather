@@ -1,7 +1,7 @@
 package com.mashael.weatherkotlin.ui
 
 import android.app.Application
-import com.mashael.weatherkotlin.ui.utils.DelegatesExt
+import com.mashael.weatherkotlin.extensions.DelegatesExt
 
 class App : Application() {
     companion object {

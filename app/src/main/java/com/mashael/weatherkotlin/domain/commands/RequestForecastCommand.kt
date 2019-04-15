@@ -4,11 +4,17 @@ import com.mashael.weatherkotlin.data.server.ForecastRequest
 import com.mashael.weatherkotlin.domain.Command
 import com.mashael.weatherkotlin.domain.ForecastDataMapper
 import com.mashael.weatherkotlin.domain.ForecastList
+import com.mashael.weatherkotlin.domain.ForecastProvider
 
-class RequestForecastCommand(val cityCoordinates: String) :
+class RequestForecastCommand(val cityCoordinates: String,
+                             val forecastProcider: ForecastProvider = ForecastProvider()
+) :
     Command<ForecastList> {
+
+    companion object{
+        val DAYS=7
+    }
     override fun execute(): ForecastList {
-        val forcastRequest = ForecastRequest(cityCoordinates)
-        return ForecastDataMapper().convertFromDataModel(forcastRequest.execute())
+        return forecastProcider.requestByCoordinates(cityCoordinates, DAYS)
     }
 }

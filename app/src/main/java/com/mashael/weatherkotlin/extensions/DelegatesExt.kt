@@ -1,4 +1,4 @@
-package com.mashael.weatherkotlin.ui.utils
+package com.mashael.weatherkotlin.extensions
 
 import kotlin.IllegalStateException
 import kotlin.reflect.KProperty

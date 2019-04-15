@@ -9,7 +9,7 @@ class DbDataMapper {
         CityForecast(id,city,country,daily)
     }
 
-    private fun convertDayFromDomain(cityId: Long, forecast: Forecast)= with(forecast) {
+    private fun convertDayFromDomain(cityId: String, forecast: Forecast)= with(forecast) {
         DayForecast(date,description,high,low,iconUrl,cityId)
     }
 
@@ -20,6 +20,5 @@ class DbDataMapper {
 
     private fun convertDayToDomain(dayForecast: DayForecast)= with(dayForecast) {
         Forecast(date,description,high,low,iconUrl)
-
     }
 }

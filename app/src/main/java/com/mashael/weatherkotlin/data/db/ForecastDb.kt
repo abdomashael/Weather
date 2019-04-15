@@ -1,20 +1,21 @@
 package com.mashael.weatherkotlin.data.db
 
 import android.database.sqlite.SQLiteDatabase
+import com.mashael.weatherkotlin.domain.ForecastDataSource
 import com.mashael.weatherkotlin.domain.ForecastList
 import com.mashael.weatherkotlin.extensions.parseList
 import com.mashael.weatherkotlin.extensions.parseOpt
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
-class ForecastDb(
-    val forecastDbHelper: ForecastDbHelper=ForecastDbHelper.instance,
-    val dataMapper:DbDataMapper=DbDataMapper()){
+class ForecastDb(val forecastDbHelper: ForecastDbHelper=
+                     ForecastDbHelper.instance, val dataMapper:DbDataMapper=DbDataMapper()):
+    ForecastDataSource {
 
-    fun requestForecastByCoordinates(coordinates:String,date :Long)
+    override fun requestForecastByCoordinates(coordinates:String,date :Long)
             =forecastDbHelper.use {
-        val dailyRequest = "${ForecastDbHelper.DayForecastTable.CITY_ID}={id}"+
-                "AND ${ForecastDbHelper.DayForecastTable.DATE}>={date}"
+        val dailyRequest = "${ForecastDbHelper.DayForecastTable.CITY_ID}=?"+
+                "AND ${ForecastDbHelper.DayForecastTable.DATE}>=?"
 
         val dailyForecast = select(ForecastDbHelper.DayForecastTable.NAME)
             .whereSimple(dailyRequest,coordinates,date.toString())

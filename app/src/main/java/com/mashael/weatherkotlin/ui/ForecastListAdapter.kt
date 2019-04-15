@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mashael.weatherkotlin.R
-import com.mashael.weatherkotlin.ui.utils.ctx
+import com.mashael.weatherkotlin.extensions.ctx
 import com.mashael.weatherkotlin.domain.Forecast
 import com.mashael.weatherkotlin.domain.ForecastList
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
+import java.text.DateFormat
+import java.util.*
 
 class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Forecast) -> Unit) :
     RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
@@ -20,13 +22,18 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
         fun bindForecast(forcast: Forecast) {
             with(forcast) {
                 Picasso.get().load(iconUrl).into(itemView.icon)
-                itemView.date.text = date
+                itemView.date.text = convertDate(date)
                 itemView.description.text = description
                 itemView.maxTemperature.text = "$high°"
                 itemView.minTemperature.text = "$low°"
                 itemView.setOnClickListener { itemClick(this) }
 
             }
+        }
+
+        private fun convertDate(date: Long): String {
+            val df= DateFormat.getDateInstance(DateFormat.MEDIUM,Locale.getDefault())
+            return df.format(date)
         }
     }
 

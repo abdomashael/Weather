@@ -4,7 +4,7 @@ interface Command<out T> {
     fun execute(): T
 }
 
-data class ForecastList(val id:Long,val city: String, val country: String, val dailyForecast: List<Forecast>) {
+data class ForecastList(val id: String, val city: String, val country: String, val dailyForecast: List<Forecast>) {
     val size: Int
         get() = dailyForecast.size
 
@@ -12,10 +12,12 @@ data class ForecastList(val id:Long,val city: String, val country: String, val d
 }
 
 data class Forecast(
-    val date: Long, val description: String, val high: Int,
-    val low: Int,val iconUrl:String
+    /*val id: String,*/val date: Long, val description: String,
+    val high: Int,val low: Int, val iconUrl: String
 )
 
-data class CurrentForecast(val main:String,val description: String,val iconUrl: String,
-                   val temp:Int,val pressure: Int,val humidity: Int,
-                   val speed: Int,val deg: Float)
+data class CurrentForecast(
+    val main: String, val description: String, val iconUrl: String,
+    val temp: Int, val pressure: Int, val humidity: Int,
+    val speed: Int, val deg: Float
+)

@@ -36,7 +36,7 @@ dependencies {
     // Anko Commons
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
-    
+
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation "com.squareup.picasso:picasso:2.71828"
 

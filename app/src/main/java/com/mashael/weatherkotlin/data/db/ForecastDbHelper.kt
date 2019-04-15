@@ -51,7 +51,7 @@ class ForecastDbHelper(ctx: Context = App.instance) :
 
         db.createTable(
             CityForecastTable.NAME, true,
-            CityForecastTable.ID to INTEGER + PRIMARY_KEY,
+            CityForecastTable.ID to TEXT + PRIMARY_KEY,
             CityForecastTable.CITY to TEXT,
             CityForecastTable.COUNTRY to TEXT
         )
@@ -64,7 +64,7 @@ class ForecastDbHelper(ctx: Context = App.instance) :
             DayForecastTable.HIGH to INTEGER,
             DayForecastTable.LOW to INTEGER,
             DayForecastTable.ICON_URL to TEXT,
-            DayForecastTable.CITY_ID to INTEGER
+            DayForecastTable.CITY_ID to TEXT
         )
 
         db.createTable(
@@ -92,7 +92,7 @@ class ForecastDbHelper(ctx: Context = App.instance) :
 
     companion object {
         val DB_NAME = "forecast.db"
-        val DB_VERSION = 1
+        val DB_VERSION = 2
         val instance by lazy { ForecastDbHelper() }
     }
 
