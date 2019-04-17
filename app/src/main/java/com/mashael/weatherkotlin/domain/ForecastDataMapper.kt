@@ -9,14 +9,14 @@ import java.util.concurrent.TimeUnit
 import com.mashael.weatherkotlin.domain.Forecast as ModelForecast
 
 class ForecastDataMapper {
-    fun convertFromDataModel(coordiantes: String, forecast: ForecastResult) = with(forecast) {
+   /* fun convertFromDataModel(coordiantes: String, forecast: ForecastResult) = with(forecast) {
         ForecastList(
             coordiantes,
             forecast.city.name,
             forecast.city.country,
             convertForecastListToDomain(forecast.list)
         )
-    }
+    }*/
 
     fun convertCurrentFromDataModel(currentForecastResult: CurrentForecastResult): CurrentForecast {
         return CurrentForecast(
@@ -31,7 +31,7 @@ class ForecastDataMapper {
         )
     }
 
-    private fun convertForecastListToDomain(list: List<Forecast>): List<ModelForecast> {
+ /*   private fun convertForecastListToDomain(list: List<Forecast>): List<ModelForecast> {
         return list.mapIndexed { i, forecast ->
             val dt = Calendar.getInstance().timeInMillis + TimeUnit.DAYS.toMillis(i.toLong())
             convertForecastItemToDomain(forecast.copy(dt = dt))
@@ -43,10 +43,11 @@ class ForecastDataMapper {
             generateIconUrl(weather[0].icon))
     }
 
-    private fun generateIconUrl(iconCode: String): String = "http://openweathermap.org/img/w/$iconCode.png"
 
     private fun convertDate(date: Long): String {
         val df = DateFormat.getDateInstance(DateFormat.MONTH_FIELD, Locale.getDefault())
         return df.format(date)
-    }
+    }*/
+ private fun generateIconUrl(iconCode: String): String = "http://openweathermap.org/img/w/$iconCode.png"
+
 }

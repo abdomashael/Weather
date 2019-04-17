@@ -11,11 +11,8 @@ data class ForecastList(val id: String, val city: String, val country: String, v
     operator fun get(position: Int): Forecast = dailyForecast[position]
 }
 
-data class Forecast(
-    /*val id: String,*/val date: Long, val description: String,
-    val high: Int,val low: Int, val iconUrl: String
-)
-
+data class Forecast(val id: Long, val date: Long, val description: String, val high: Int, val low: Int,
+                    val iconUrl: String)
 data class CurrentForecast(
     val main: String, val description: String, val iconUrl: String,
     val temp: Int, val pressure: Int, val humidity: Int,

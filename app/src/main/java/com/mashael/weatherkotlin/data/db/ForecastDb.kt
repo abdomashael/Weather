@@ -1,8 +1,10 @@
 package com.mashael.weatherkotlin.data.db
 
 import android.database.sqlite.SQLiteDatabase
+import com.mashael.weatherkotlin.domain.Forecast
 import com.mashael.weatherkotlin.domain.ForecastDataSource
 import com.mashael.weatherkotlin.domain.ForecastList
+import com.mashael.weatherkotlin.extensions.byId
 import com.mashael.weatherkotlin.extensions.parseList
 import com.mashael.weatherkotlin.extensions.parseOpt
 import org.jetbrains.anko.db.insert
@@ -11,7 +13,12 @@ import org.jetbrains.anko.db.select
 class ForecastDb(val forecastDbHelper: ForecastDbHelper=
                      ForecastDbHelper.instance, val dataMapper:DbDataMapper=DbDataMapper()):
     ForecastDataSource {
+    override fun requestDayForecast(id: Long)= forecastDbHelper.use {
+        val forecast = select(ForecastDbHelper.DayForecastTable.NAME).byId(id).
+            parseOpt { DayForecast(HashMap(it)) }
 
+        if (forecast != null) dataMapper.convertDayToDomain(forecast) else null
+    }
     override fun requestForecastByCoordinates(coordinates:String,date :Long)
             =forecastDbHelper.use {
         val dailyRequest = "${ForecastDbHelper.DayForecastTable.CITY_ID}=?"+

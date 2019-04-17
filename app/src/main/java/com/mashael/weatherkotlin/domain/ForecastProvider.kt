@@ -13,13 +13,16 @@ class ForecastProvider(private val sources: List<ForecastDataSource> =
 
     }
 
-    fun requestByCoordinates(coordinates: String,days:Int):ForecastList
-    = sources.firstResult{requestSource(it,days,coordinates)}
-
-    private fun requestSource(source: ForecastDataSource, days: Int, coordinates: String): ForecastList? {
-        val res = source.requestForecastByCoordinates(coordinates,todayTimeSpan())
-        return if (res!=null && res.size >=days) res else null
+    fun requestByCoordinates(coordinates: String,days:Int):ForecastList= requestToSources {
+        val res = it.requestForecastByCoordinates(coordinates, todayTimeSpan())
+        if (res != null && res.size >= days) res else null
     }
+
+    fun requestForecast(id: Long): Forecast = requestToSources { it.requestDayForecast(id) }
+
+
+    private fun <T : Any> requestToSources(f: (ForecastDataSource) -> T?): T = sources.firstResult { f(it) }
+
 
     private fun todayTimeSpan()=System.currentTimeMillis()/ DAY_IN_MILLIS * DAY_IN_MILLIS
 }

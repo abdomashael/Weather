@@ -5,18 +5,18 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.mashael.weatherkotlin.R
 import com.mashael.weatherkotlin.domain.commands.RequestCurrentForecastCommand
 import com.mashael.weatherkotlin.ui.utils.PermissionCheck
 import com.mashael.weatherkotlin.domain.commands.RequestForecastCommand
+import com.mashael.weatherkotlin.ui.utils.ToolbarManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.current_forecast.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -27,7 +27,7 @@ import java.util.*
 private val ZIP_NO = "94043"
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),ToolbarManager {
     /*val url = "http://api.openweathermap.org/data/2.5/forecast/daily?" +
             "APPID=15646a06818f61f7b8d7823ca833e1ce&zip=94043&mode=json&units=metric&cnt=7"
 */
@@ -37,9 +37,14 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        initToolbar()
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         forecastList.layoutManager = LinearLayoutManager(this)
@@ -67,12 +72,14 @@ class MainActivity : AppCompatActivity() {
         doAsync {
             val result = RequestForecastCommand(cityCoordinates).execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result) { forecast ->
-                    toast(forecast.date.toString())
+                forecastList.adapter = ForecastListAdapter(result) {
+                    startActivity<DetailActivity>(DetailActivity.ID to it.id,
+                        DetailActivity.CITY_NAME to result.city)
                 }
 
                 citynameTextview.text = result.city
                 countrynameTextview.text = result.country
+                toolbarTitle = "${result.city} (${result.country})"
             }
         }
     }

@@ -1,74 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.MainActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.MainActivity">
+        android:layout_height="match_parent">
 
-    <ImageView
-            android:scaleType="fitCenter"
-            android:background="@drawable/day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    <LinearLayout
-            android:padding="12dp"
-            android:orientation="vertical"
+    <RelativeLayout
+            android:paddingTop="@dimen/spacing_xlarge"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
+
+        <ImageView
+                android:scaleType="fitCenter"
+                android:background="@drawable/day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         <LinearLayout
-                android:layout_marginBottom="4dp"
+                android:padding="12dp"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
-            <TextView
-                    android:id="@+id/citynameTextview"
-                    android:gravity="center_vertical"
-                    android:textColor="@android:color/white"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-
-            <TextView
-                    android:layout_marginStart="4dp"
-                    android:id="@+id/countrynameTextview"
-                    android:gravity="center_vertical"
-                    android:textColor="@android:color/darker_gray"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-
-        </LinearLayout>
-
-        <include layout="@layout/current_forecast"/>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/background"
-                android:orientation="vertical">
-            <TextView
-                    android:padding="4dp"
+            <LinearLayout
+                    android:layout_marginBottom="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="7-day forecast"
+                    android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:textColor="@android:color/white"/>
-            <View
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:id="@+id/citynameTextview"
+                        android:gravity="center_vertical"
+                        android:textColor="@android:color/white"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                <TextView
+                        android:layout_marginStart="4dp"
+                        android:id="@+id/countrynameTextview"
+                        android:gravity="center_vertical"
+                        android:textColor="@android:color/darker_gray"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/current_forecast"/>
+
+            <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimaryDark"/>
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/forecastList"
-                    android:padding="@dimen/spacing_xlarge"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/background"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:padding="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="7-day forecast"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"/>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorPrimaryDark"/>
+
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/forecastList"
+                        android:padding="@dimen/spacing_xlarge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+    </RelativeLayout>
+    <include layout="@layout/toolbar"/>
+</FrameLayout>
