@@ -2,4 +2,7 @@
     <string name="app_name">WeatherKotlin</string>
     <string name="hello_world">Hello World!</string>
     <string name="settings">settings</string>
+    <string name="city_coordinates">City Coordinates</string>
+    <string name="city_Lon">City longituite</string>
+    <string name="city_Lat">City Latituide</string>
 </resources>

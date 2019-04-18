@@ -92,7 +92,7 @@ class ForecastDbHelper(ctx: Context = App.instance) :
 
     companion object {
         val DB_NAME = "forecast.db"
-        val DB_VERSION = 2
+        val DB_VERSION = 3
         val instance by lazy { ForecastDbHelper() }
     }
 
